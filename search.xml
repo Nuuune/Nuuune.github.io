@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[日常小坑(Array.prototype.fill)]]></title>
+      <url>/2018/%E6%97%A5%E5%B8%B8%E5%B0%8F%E5%9D%91/</url>
+      <content type="html"><![CDATA[<p>当参数为对象时，此数组里的每一项都是这个对象的引用<br>当遍历改变此数组里的对象时，所有数组项同时改变</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> list = <span class="built_in">Array</span>(<span class="number">20</span>).fill(&#123; <span class="attr">url</span>: <span class="string">"xxx"</span>, id=<span class="number">-1</span>&#125;);</span><br><span class="line">list.forEach(<span class="function">(<span class="params">curr, index</span>) =&gt;</span> &#123;</span><br><span class="line">  curr.id = index;</span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">list.forEach(<span class="function">(<span class="params">curr</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(curr.id);    <span class="comment">//所有输出都为19</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> 前端 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> JS </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[用CSS去掉双击后的蓝色背景]]></title>
+      <url>/2018/%E7%94%A8CSS%E5%8E%BB%E6%8E%89%E5%8F%8C%E5%87%BB%E5%90%8E%E7%9A%84%E8%93%9D%E8%89%B2%E8%83%8C%E6%99%AF/</url>
+      <content type="html"><![CDATA[<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.elements</span> &#123;</span><br><span class="line">  <span class="attribute">-moz-user-select</span>: none;  <span class="comment">/* firefox */</span></span><br><span class="line">  <span class="attribute">-webkit-user-select</span>: none;  <span class="comment">/* webkit */</span></span><br><span class="line">  <span class="attribute">-ms-user-select</span>: none;  <span class="comment">/* IE10+ */</span></span><br><span class="line">  <span class="attribute">-khtml-user-select</span>: none;  <span class="comment">/* 早期浏览器 */</span></span><br><span class="line">  <span class="attribute">user-select</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> 前端 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> CSS </tag>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
