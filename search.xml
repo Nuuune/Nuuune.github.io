@@ -4,7 +4,7 @@
     
     <entry>
       <title><![CDATA[日常小坑(Array.prototype.fill)]]></title>
-      <url>/2018/%E6%97%A5%E5%B8%B8%E5%B0%8F%E5%9D%91/</url>
+      <url>/2017/%E6%97%A5%E5%B8%B8%E5%B0%8F%E5%9D%91/</url>
       <content type="html"><![CDATA[<p>当参数为对象时，此数组里的每一项都是这个对象的引用<br>当遍历改变此数组里的对象时，所有数组项同时改变</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> list = <span class="built_in">Array</span>(<span class="number">20</span>).fill(&#123; <span class="attr">url</span>: <span class="string">"xxx"</span>, id=<span class="number">-1</span>&#125;);</span><br><span class="line">list.forEach(<span class="function">(<span class="params">curr, index</span>) =&gt;</span> &#123;</span><br><span class="line">  curr.id = index;</span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">list.forEach(<span class="function">(<span class="params">curr</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(curr.id);    <span class="comment">//所有输出都为19</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
       
@@ -25,7 +25,7 @@
     
     <entry>
       <title><![CDATA[用CSS去掉双击后的蓝色背景]]></title>
-      <url>/2018/%E7%94%A8CSS%E5%8E%BB%E6%8E%89%E5%8F%8C%E5%87%BB%E5%90%8E%E7%9A%84%E8%93%9D%E8%89%B2%E8%83%8C%E6%99%AF/</url>
+      <url>/2017/%E7%94%A8CSS%E5%8E%BB%E6%8E%89%E5%8F%8C%E5%87%BB%E5%90%8E%E7%9A%84%E8%93%9D%E8%89%B2%E8%83%8C%E6%99%AF/</url>
       <content type="html"><![CDATA[<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.elements</span> &#123;</span><br><span class="line">  <span class="attribute">-moz-user-select</span>: none;  <span class="comment">/* firefox */</span></span><br><span class="line">  <span class="attribute">-webkit-user-select</span>: none;  <span class="comment">/* webkit */</span></span><br><span class="line">  <span class="attribute">-ms-user-select</span>: none;  <span class="comment">/* IE10+ */</span></span><br><span class="line">  <span class="attribute">-khtml-user-select</span>: none;  <span class="comment">/* 早期浏览器 */</span></span><br><span class="line">  <span class="attribute">user-select</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       
@@ -39,6 +39,137 @@
         <tags>
             
             <tag> CSS </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[JS学习(数据类型)]]></title>
+      <url>/2016/JS%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+      <content type="html"><![CDATA[<p>初入前端，JS作为前端三剑客中的一员，是必须要了解且精通的。<br>学习参考书：<a href="http://javascript.ruanyifeng.com/" target="_blank" rel="noopener">《JavaScript 标准参考教程（alpha）》</a>，by 阮一峰</p>
+<p>此《JS学习》系列为对参考书进行学习的日志，作为本人的<em>学习笔记</em><br><a id="more"></a></p>
+<hr>
+<h2 id="引导"><a href="#引导" class="headerlink" title="引导"></a>引导</h2><ul>
+<li><a href="#ar1">六种数据类型</a></li>
+<li><a href="#ar2">判断数据类型的方法</a></li>
+<li><a href="#ar3">数值类型(Number)</a></li>
+</ul>
+<p><a name="ar1"></a></p>
+<h3 id="六种数据类型"><a href="#六种数据类型" class="headerlink" title="六种数据类型"></a>六种数据类型</h3><ul>
+<li>数值（number）：整数和小数（比如1和3.14）</li>
+<li>字符串（string）：文本（比如Hello World）。</li>
+<li>布尔值（boolean）：表示真伪的两个特殊值，即true（真）和false（假）</li>
+<li>undefined：表示“未定义”或不存在，即由于目前没有定义，所以此处暂时没有任何值</li>
+<li>null：表示空值，即此处的值为空。</li>
+<li>对象（object）：各种值组成的集合。</li>
+</ul>
+<p><em>对象又分为<code>object</code>(狭义对象) <code>array</code>(数组) <code>function</code>(方法)</em></p>
+<p><a name="ar2"></a></p>
+<h3 id="判断数据类型的方法"><a href="#判断数据类型的方法" class="headerlink" title="判断数据类型的方法"></a>判断数据类型的方法</h3><h4 id="1-typeof-运算符"><a href="#1-typeof-运算符" class="headerlink" title="(1) typeof 运算符"></a>(1) typeof 运算符</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="number">123</span> <span class="comment">// "number"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">'123'</span> <span class="comment">// "string"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">false</span> <span class="comment">// "boolean"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">typeof</span> f</span><br><span class="line"><span class="comment">// "function"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span> <span class="comment">// "undefined"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> <span class="comment">// "object" ---&gt; 对于null来说是历史原因造成的，它并不是对象类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> <span class="built_in">window</span> <span class="comment">// "object"</span></span><br><span class="line"><span class="keyword">typeof</span> &#123;&#125; <span class="comment">// "object"</span></span><br><span class="line"><span class="keyword">typeof</span> [] <span class="comment">// "object"</span></span><br></pre></td></tr></table></figure>
+<p>从上面代码可以发现，<code>typeof</code>对于基本数据类型判断还是没问题的<br>但是对于对象(狭义)与数组还是不能很好区分所以可以采用接下来的方法</p>
+<h4 id="2-instanceof-运算符"><a href="#2-instanceof-运算符" class="headerlink" title="(2) instanceof 运算符"></a>(2) instanceof 运算符</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"></span><br><span class="line">o <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// false</span></span><br><span class="line">a <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><a name="ar3"></a></p>
+<h3 id="数值-Number"><a href="#数值-Number" class="headerlink" title="数值(Number)"></a>数值(Number)</h3><blockquote>
+<p>JavaScript 语言的底层根本没有整数，所有数字都是小数（64位浮点数）。<br>由于浮点数不是精确的值，所以涉及小数的比较和运算要特别小心。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.3</span></span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="number">0.3</span> / <span class="number">0.1</span></span><br><span class="line"><span class="comment">// 2.9999999999999996</span></span><br><span class="line"></span><br><span class="line">(<span class="number">0.3</span> - <span class="number">0.2</span>) === (<span class="number">0.2</span> - <span class="number">0.1</span>)</span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h4 id="特殊数值"><a href="#特殊数值" class="headerlink" title="特殊数值"></a>特殊数值</h4><ul>
+<li>正零和负零</li>
+<li>NaN (非数字)</li>
+<li>Infinity (无穷)</li>
+</ul>
+<p><strong>正零</strong> 和 <strong>负零</strong> 在绝大多数场合和零是没有区别的<br>只有当其作为分母时会分别产生<code>+Infinity</code> <code>-Infinity</code></p>
+<p><strong>NaN</strong> 主要出现在将字符串解析成数字出错的场合，还有一些函数运算上<br><code>0 / 0</code> 也会出现<br>它不是一种独立数据类型，只是 <strong>Number</strong> 数据类型中的特殊值<br>判断一个变量是否为此值可以采取 <code>isNaN()</code> 方法 返回一个 <code>boolean</code> 值</p>
+<p><strong>Infinity</strong> 用来表示正的数值太大或负的数值太小 还一种方式 <em>非0数除以0</em>    </p>
+<p>最后对于判断是否为特殊值可以采用 <code>isFinite()</code> 方法 为特殊值会返回 <code>false</code> </p>
+]]></content>
+      
+        <categories>
+            
+            <category> 前端 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> JS </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[JS学习(基本语法)]]></title>
+      <url>/2016/JS%E5%AD%A6%E4%B9%A0-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p>初入前端，JS作为前端三剑客中的一员，是必须要了解且精通的。<br>学习参考书：<a href="http://javascript.ruanyifeng.com/" target="_blank" rel="noopener">《JavaScript 标准参考教程（alpha）》</a>，by 阮一峰</p>
+<p>此《JS学习》系列为对参考书进行学习的日志，作为本人的<em>学习笔记</em><br><a id="more"></a></p>
+<hr>
+<h3 id="语句-Statement-与表达式-Expression"><a href="#语句-Statement-与表达式-Expression" class="headerlink" title="语句(Statement)与表达式(Expression)"></a>语句(Statement)与表达式(Expression)</h3><blockquote>
+<p>语句是为了完成某种任务而进行的操作</p>
+<p>语句以分号结尾</p>
+<p>表达式是指一个为了得到返回值的计算式</p>
+<p>表达式以分号结尾将成为一句无意义的语句</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">3</span> + <span class="number">3</span>;  <span class="comment">// 为赋值语句， 等号右边为表达式 3 + 3</span></span><br><span class="line"></span><br><span class="line">;;;  <span class="comment">// 一行允许多个语句， 但此行三个语句前无任何内容， 为三个空语句</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span> * <span class="number">4</span>;  <span class="comment">//  此行为表达式后添加分号， 只是单纯的产生一个值 没有意义</span></span><br></pre></td></tr></table></figure>
+<h3 id="变量提升-hoisting"><a href="#变量提升-hoisting" class="headerlink" title="变量提升(hoisting)"></a>变量提升(hoisting)</h3><blockquote>
+<p>JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就叫做变量提升（hoisting）。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*上面代码首先使用console.log方法，在控制台（console）显示变量a的值。</span></span><br><span class="line"><span class="comment">*这时变量a还没有声明和赋值，所以这是一种错误的做法，</span></span><br><span class="line"><span class="comment">*但是实际上不会报错。因为存在变量提升，真正运行的是下面的代码。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a);  <span class="comment">// 输出undefined</span></span><br><span class="line">a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 这是单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> 这是</span></span><br><span class="line"><span class="comment"> 多行</span></span><br><span class="line"><span class="comment"> 注释</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*历史上 JavaScript 可以兼容 HTML 代码的注释，不推荐使用*/</span></span><br><span class="line"></span><br><span class="line">x = <span class="number">1</span>; &lt;!-- x = 2;    //  '&lt;!--' 可用作单行注释，此注释任意位置</span><br><span class="line">--&gt; x = 3;		//  '--&gt;' 可用作单行注释，但此注释必须在行头</span><br><span class="line">console.log(x);  // 输出为 1</span><br></pre></td></tr></table></figure>
+<h3 id="标签-label"><a href="#标签-label" class="headerlink" title="标签(label)"></a>标签(label)</h3><blockquote>
+<p>JavaScript 语言允许，语句的前面有标签（label），相当于定位符，用于跳转到程序的任意位置，标签的格式如下。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">top:  <span class="comment">//  这是一个标签</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">  	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; j++) &#123;</span><br><span class="line">  		<span class="keyword">if</span>(i === <span class="number">2</span> &amp;&amp; j === <span class="number">3</span>)</span><br><span class="line">  		  <span class="keyword">break</span> top;  <span class="comment">//  配合break使用， 当i等于2 j等于3时 直接跳出整个循环</span></span><br><span class="line">  	&#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>标签常配合<code>continue</code> <code>break</code> 使用，来跳到指定位置</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 前端 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> JS </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[JS学习(前言)]]></title>
+      <url>/2016/JS%E5%AD%A6%E4%B9%A0-%E5%89%8D%E8%A8%80/</url>
+      <content type="html"><![CDATA[<p>初入前端，JS作为前端三剑客中的一员，是必须要了解且精通的。<br>学习参考书：<a href="http://javascript.ruanyifeng.com/" target="_blank" rel="noopener">《JavaScript 标准参考教程（alpha）》</a>，by 阮一峰</p>
+<p>此《JS学习》系列为对参考书进行学习的日志，作为本人的<em>学习笔记</em><br><a id="more"></a></p>
+<hr>
+<h3 id="关于JS"><a href="#关于JS" class="headerlink" title="关于JS"></a>关于JS</h3><p>JS作为一门编程语言，其核心语法是相当精简的，只包括两个部分；基本的语法构造（比如操作符、控制结构、语句）和标准库（就是一系列具有各种功能的对象比如<code>Array</code>、<code>Date</code>、<code>Math</code>等）。除此之外，各种宿主环境提供额外的 API（即只能在该环境使用的接口），以便 JavaScript 调用。以浏览器为例，它提供的额外 API 可以分成三大类：</p>
+<ul>
+<li>浏览器控制类：操作浏览器</li>
+<li>DOM 类：操作网页的各种元素</li>
+<li>Web 类：实现互联网的各种功能</li>
+</ul>
+<hr>
+<h3 id="关于JS性能"><a href="#关于JS性能" class="headerlink" title="关于JS性能"></a>关于JS性能</h3><h4 id="1-灵活的语法，表达力强"><a href="#1-灵活的语法，表达力强" class="headerlink" title="1. 灵活的语法，表达力强"></a>1. 灵活的语法，表达力强</h4><p>JavaScript 既支持类似 C 语言清晰的过程式编程，也支持灵活的函数式编程。可以用来写并发处理（concurrent）。这些语法特性已经被证明非常强大，可以用于许多场合，尤其适用异步编程。</p>
+<p>JavaScript 的所有值都是对象，这为程序员提供了灵活性和便利性。因为你可以很方便地、按照需要随时创造数据结构，不用进行麻烦的预定义。</p>
+<p>JavaScript 的标准还在快速进化中，并不断合理化，并添加更适用的语法特性。</p>
+<h4 id="2-支持编译运行"><a href="#2-支持编译运行" class="headerlink" title="2. 支持编译运行"></a>2. 支持编译运行</h4><p>JavaScript 语言本身，虽然是一种解释型语言，但是在现代浏览器中，JavaScript 都是编译后运行。程序会被高度优化，运行效率接近二进制程序。而且，JavaScript 引擎正在快速发展，性能将越来越好。</p>
+<h4 id="3-事件驱动和非阻塞式设计"><a href="#3-事件驱动和非阻塞式设计" class="headerlink" title="3. 事件驱动和非阻塞式设计"></a>3. 事件驱动和非阻塞式设计</h4><p>JavaScript 程序可以采用事件驱动（event-driven）和非阻塞式（non-blocking）设计，在服务器端适合高并发环境，普通的硬件就可以承受很大的访问量。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 前端 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> JS </tag>
             
         </tags>
         
