@@ -1,10 +1,12 @@
 ---
 title: JS学习(前言)
 tags:
-- JS
+  - JS
 categories:
-- 前端
+  - 前端
+date: 2016-12-09 23:20:30
 ---
+
 
 初入前端，JS作为前端三剑客中的一员，是必须要了解且精通的。
 学习参考书：[《JavaScript 标准参考教程（alpha）》](http://javascript.ruanyifeng.com/)，by 阮一峰

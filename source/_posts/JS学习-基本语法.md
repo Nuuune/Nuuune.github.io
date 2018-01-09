@@ -1,10 +1,13 @@
 ---
-title: JS学习(语法)
+layout: js学习-前言
+title: JS学习(基本语法)
 tags:
-- JS
+  - JS
 categories:
-- 前端
+  - 前端
+date: 2016-12-13 22:24:25
 ---
+
 
 初入前端，JS作为前端三剑客中的一员，是必须要了解且精通的。
 学习参考书：[《JavaScript 标准参考教程（alpha）》](http://javascript.ruanyifeng.com/)，by 阮一峰
@@ -74,3 +77,19 @@ x = 1; <!-- x = 2;    //  '<!--' 可用作单行注释，此注释任意位置
 console.log(x);  // 输出为 1
 
 ```
+
+### 标签(label)
+
+>JavaScript 语言允许，语句的前面有标签（label），相当于定位符，用于跳转到程序的任意位置，标签的格式如下。
+
+```javascript
+top:  //  这是一个标签
+  for(var i = 0; i < 4; i++) {
+  	for(var j = 0; j < 5; j++) {
+  		if(i === 2 && j === 3)
+  		  break top;  //  配合break使用， 当i等于2 j等于3时 直接跳出整个循环
+  	}
+  }
+```
+
+标签常配合`continue` `break` 使用，来跳到指定位置
