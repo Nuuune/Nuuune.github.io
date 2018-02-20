@@ -3,6 +3,34 @@
   
     
     <entry>
+      <title><![CDATA[node服务器接收前端参数的坑]]></title>
+      <url>/2018/node%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E7%9A%84%E5%9D%91/</url>
+      <content type="html"><![CDATA[<p>在写后台时发现<code>req.body</code>取不到前端传过来的参数，后来发现是参数类型的问题，<br>特此记录<br><a id="more"></a></p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>开始用<strong> POSTMAN </strong> 插件时测试接口发现参数都没问题<br><code>req.body</code> 能够取到传来参数值<br>而实际用到自己的前端项目上时发现后台取不到传来的参数了<br>前端采用的是<strong> axios.js </strong> 插件来进行HTTP请求的，<br>通过浏览器debug可以发现请求里参数全都在<strong> Request Payload </strong> 之下<br>所以通过<code>req.body</code>取不到了</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>解决方法可以通过以下类似代码解决：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求处理</span></span><br><span class="line"><span class="keyword">var</span> reqBody = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">""</span>;</span><br><span class="line">req.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">  str += chunk;</span><br><span class="line">&#125;);</span><br><span class="line">req.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  reqBody = <span class="built_in">JSON</span>.parse(str);</span><br><span class="line">  <span class="comment">//省略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这是由于</p>
+<blockquote>
+<p>Request Payload方式是以“流“”的方式出入到后台，需要监听data事件来获取完整的数据。</p>
+</blockquote>
+<p>借鉴<a href="http://www.cnblogs.com/hsp-blog/p/5919877.html" target="_blank" rel="noopener">此处</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 后端 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> node.js </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[html-webpack-plugin 中使用jade/pug模板]]></title>
       <url>/2018/html-webpack-plugin-%E4%B8%AD%E4%BD%BF%E7%94%A8jade-pug%E6%A8%A1%E6%9D%BF/</url>
       <content type="html"><![CDATA[<p>关于 <em> html-webpack-plugin </em> 使用自定义模板的传参问题<br><a id="more"></a></p>
@@ -30,39 +58,6 @@
             <tag> jade </tag>
             
             <tag> pug </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Vue-开发表单组件遇到的问题]]></title>
-      <url>/2018/Vue-%E5%BC%80%E5%8F%91%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-      <content type="html"><![CDATA[<p>在写表单组件时，想写一个从父元素传来表单所需的组件类型，<br>通过computed属性来初始化表单各子输入框的基本类型及数据</p>
-<p>写的过程中出现了computed初始化表单数据并没有双向绑定的<br>问题，对此进行分析记录<br><a id="more"></a></p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//简单demo,'co'是父组件传来的参数并计算得到的computed属性</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span> <span class="attr">v-text</span>=<span class="string">"co.text"</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"co.text"</span> <span class="attr">type</span>=<span class="string">"text"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"show"</span>&gt;</span>show co<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//部分script</span><br><span class="line">computed: &#123;</span><br><span class="line">  co () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      text: "co"</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line">  show () &#123;</span><br><span class="line">    console.log(this.co.text)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>效果如下：<br><img src="/imgs/0123.gif" alt="效果图 1.1"></p>
-<p><strong> 分析 </strong><br>从上图可以看出，初始渲染是没有问题的，但是当改变输入框的值时， <code>this.co.text</code> 是跟着改变了，但是却没有在<code>&lt;h3&gt;</code>标签上渲染出来</p>
-<p>查询官网，推荐使用data对象，因为在Vue实例化时，会对data对象进行setter/getter的转换，而computed属性不会，只有转换为setter/getter才能被watch观察，更新，重新渲染，所以使用computed属性进行绑定是不会达到响应式的<br>具体可以参考官方文档 <a href="https://cn.vuejs.org/v2/guide/reactivity.html#%E5%A6%82%E4%BD%95%E8%BF%BD%E8%B8%AA%E5%8F%98%E5%8C%96" target="_blank" rel="noopener">Vue 深入响应式原理</a></p>
-<p><strong> 解决方案 </strong><br>将computed属性的对象地址，赋给data对象的属性中</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//改为直接从data中拿值渲染，到达响应</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span> <span class="attr">v-text</span>=<span class="string">"dataCo.text"</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"dataCo.text"</span> <span class="attr">type</span>=<span class="string">"text"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"show"</span>&gt;</span>show co<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//部分script</span><br><span class="line"></span><br><span class="line">+data () &#123;</span><br><span class="line">+  return &#123;</span><br><span class="line">+    dataCo: null</span><br><span class="line">+  &#125;</span><br><span class="line">+&#125;,</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">  co () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      text: "co"</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">methods: &#123;</span><br><span class="line">  show () &#123;</span><br><span class="line">    console.log(this.co.text)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">//需要在数据加载完后赋值</span><br><span class="line">+created () &#123;</span><br><span class="line">+  this.dataCo = this.co;</span><br><span class="line">+&#125;</span><br></pre></td></tr></table></figure>
-<p><em> 注意: </em> 通过此操作之后，<code>co</code> 与 <code>dataCo</code>是同步一起了，因为它们都是指向了同一个对象的地址 </p>
-]]></content>
-      
-        <categories>
-            
-            <category> 框架 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Vue </tag>
-            
-            <tag> computed属性 </tag>
-            
-            <tag> data属性 </tag>
             
         </tags>
         
@@ -251,7 +246,7 @@
 <p>JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就叫做变量提升（hoisting）。</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*上面代码首先使用console.log方法，在控制台（console）显示变量a的值。</span></span><br><span class="line"><span class="comment">*这时变量a还没有声明和赋值，所以这是一种错误的做法，</span></span><br><span class="line"><span class="comment">*但是实际上不会报错。因为存在变量提升，真正运行的是下面的代码。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a);  <span class="comment">// 输出undefined</span></span><br><span class="line">a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 这是单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> 这是</span></span><br><span class="line"><span class="comment"> 多行</span></span><br><span class="line"><span class="comment"> 注释</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*历史上 JavaScript 可以兼容 HTML 代码的注释，不推荐使用*/</span></span><br><span class="line"></span><br><span class="line">x = <span class="number">1</span>; <span class="xml"><span class="comment">&lt;!-- x = 2;    //  '&lt;!--' 可用作单行注释，此注释任意位置</span></span></span><br><span class="line"><span class="xml">--&gt; x = 3;		//  '--&gt;' 可用作单行注释，但此注释必须在行头</span></span><br><span class="line"><span class="xml">console.log(x);  // 输出为 1</span></span><br></pre></td></tr></table></figure>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 这是单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> 这是</span></span><br><span class="line"><span class="comment"> 多行</span></span><br><span class="line"><span class="comment"> 注释</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*历史上 JavaScript 可以兼容 HTML 代码的注释，不推荐使用*/</span></span><br><span class="line"></span><br><span class="line">x = <span class="number">1</span>; &lt;!-- x = 2;    //  '&lt;!--' 可用作单行注释，此注释任意位置</span><br><span class="line">--&gt; x = 3;		//  '--&gt;' 可用作单行注释，但此注释必须在行头</span><br><span class="line">console.log(x);  // 输出为 1</span><br></pre></td></tr></table></figure>
 <h3 id="标签-label"><a href="#标签-label" class="headerlink" title="标签(label)"></a>标签(label)</h3><blockquote>
 <p>JavaScript 语言允许，语句的前面有标签（label），相当于定位符，用于跳转到程序的任意位置，标签的格式如下。</p>
 </blockquote>
